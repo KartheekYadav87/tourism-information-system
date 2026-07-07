@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--
+    layout.html – Thymeleaf layout fragment for Tourism Information System
+    Provides: <head> meta, CSS imports, navbar, footer, JS imports.
+    All pages include this via th:replace or th:insert fragments.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description"
+          th:content="${metaDescription} ?: 'Discover the best tourist attractions, hotels, and travel guides across Tamil Nadu. Plan your perfect trip with Tamil Nadu Tourism.'"/>
+    <meta name="keywords" content="Tamil Nadu tourism, tourist attractions, hotels, beaches, temples, waterfalls, wildlife, hill stations"/>
+    <meta name="author" content="Tamil Nadu Tourism Department"/>
+    <meta property="og:title" th:content="${pageTitle} ?: 'Tamil Nadu Tourism'"/>
+    <meta property="og:description" content="Discover the wonders of Tamil Nadu – temples, beaches, wildlife, and more."/>
+    <meta property="og:type" content="website"/>
+
+    <title th:text="${pageTitle} ?: 'Tamil Nadu Tourism'">${pageTitle}</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous"/>
+
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"/>
+
+    <!-- Global Tourism Styles -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <!-- Page-specific CSS (injected by child templates) -->
+    <th:block th:replace="${extraHead} ?: _" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     NAVIGATION BAR
+     ═══════════════════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg" id="mainNavbar" aria-label="Main navigation">
+    <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/}" id="nav-brand">
+            <i class="fas fa-landmark brand-icon fs-4"></i>
+            <div>
+                <span class="d-block lh-1" style="font-size:1.15rem; font-weight:800;">TN Tourism</span>
+                <span class="brand-sub">State Tourism Department</span>
+            </div>
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Nav Links -->
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}" id="nav-home"
+                       th:classappend="${currentPage == 'home'} ? ' active' : ''">
+                        <i class="fas fa-home me-1 d-lg-none"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/attractions}" id="nav-attractions"
+                       th:classappend="${currentPage == 'attractions'} ? ' active' : ''">
+                        <i class="fas fa-mountain me-1 d-lg-none"></i>Attractions
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/hotels}" id="nav-hotels"
+                       th:classappend="${currentPage == 'hotels'} ? ' active' : ''">
+                        <i class="fas fa-hotel me-1 d-lg-none"></i>Hotels
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/guides}" id="nav-guides"
+                       th:classappend="${currentPage == 'guides'} ? ' active' : ''">
+                        <i class="fas fa-book-open me-1 d-lg-none"></i>Guides
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/gallery}" id="nav-gallery"
+                       th:classappend="${currentPage == 'gallery'} ? ' active' : ''">
+                        <i class="fas fa-images me-1 d-lg-none"></i>Gallery
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}" id="nav-about"
+                       th:classappend="${currentPage == 'about'} ? ' active' : ''">
+                        <i class="fas fa-info-circle me-1 d-lg-none"></i>About
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn btn-sm btn-primary-brand" th:href="@{/contact}" id="nav-contact">
+                        <i class="fas fa-envelope me-1"></i>Contact Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN PAGE CONTENT – Injected by child templates
+     ═══════════════════════════════════════════════════ -->
+<main id="main-content">
+    <th:block th:replace="${pageContent} ?: _"/>
+</main>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════ -->
+<footer class="site-footer" id="site-footer">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- Brand column -->
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-brand">
+                    <i class="fas fa-landmark text-accent me-2"></i>TN Tourism
+                </div>
+                <p class="footer-desc">
+                    Tamil Nadu Tourism Department – Your official guide to exploring the state's
+                    magnificent temples, pristine beaches, lush wildlife, and vibrant culture.
+                    Discover Incredible Tamil Nadu.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Quick Links</p>
+                <ul class="footer-links">
+                    <li><a th:href="@{/}"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Attractions</a></li>
+                    <li><a th:href="@{/hotels}"><i class="fas fa-chevron-right"></i> Hotels</a></li>
+                    <li><a th:href="@{/guides}"><i class="fas fa-chevron-right"></i> Travel Guides</a></li>
+                    <li><a th:href="@{/gallery}"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                    <li><a th:href="@{/about}"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a th:href="@{/contact}"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Attractions Categories -->
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Explore</p>
+                <ul class="footer-links">
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Beaches</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Temples</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Waterfalls</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Wildlife</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Hill Stations</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Museums</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-lg-4 col-md-6">
+                <p class="footer-heading">Contact Information</p>
+                <div class="footer-contact-item">
+                    <i class="fas fa-map-marker-alt mt-1"></i>
+                    <span>Tourism Complex, No. 2, Wallajah Road,<br/>Chennai – 600 002, Tamil Nadu, India</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>Toll Free: 1800-425-4747 (24x7)<br/>+91-44-2538-3333</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@tamilnadutourism.tn.gov.in</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-globe"></i>
+                    <span>www.tamilnadutourism.tn.gov.in</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p>© 2025 Tamil Nadu Tourism Department. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>
+                        <a href="#" class="text-muted me-3" style="font-size:.82rem;">Privacy Policy</a>
+                        <a href="#" class="text-muted me-3" style="font-size:.82rem;">Terms of Use</a>
+                        <a href="#" class="text-muted" style="font-size:.82rem;">Sitemap</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmAFa0tJFhDJgMXez0CmRZY3cca"
+        crossorigin="anonymous"></script>
+
+<!-- Main application JS -->
+<script th:src="@{/js/main.js}"></script>
+
+<!-- Page-specific JS -->
+<th:block th:replace="${extraScripts} ?: _"/>
+
+</body>
+</html>

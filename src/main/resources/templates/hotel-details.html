@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<!--
+    hotel-details.html – Detailed view for a single hotel.
+    Shows: gallery, amenities, reviews, similar hotels, booking CTA.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" th:content="'Stay at ' + ${hotel.name} + ' in ' + ${hotel.location} + '. ' + ${#strings.abbreviate(hotel.description, 120)}"/>
+    <title th:text="${pageTitle}">Hotel Details – Tamil Nadu Tourism</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/hotels.css}"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg" id="mainNavbar">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/}">
+            <i class="fas fa-landmark brand-icon fs-4"></i>
+            <div>
+                <span class="d-block lh-1" style="font-size:1.15rem; font-weight:800;">TN Tourism</span>
+                <span class="brand-sub">State Tourism Department</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/attractions}">Attractions</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/hotels}">Hotels</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/guides}">Guides</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/gallery}">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
+                <li class="nav-item ms-lg-2"><a class="btn btn-sm btn-primary-brand" th:href="@{/contact}"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="container position-relative" style="z-index:5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/hotels}">Hotels</a></li>
+                <li class="breadcrumb-item active" th:text="${hotel.name}">Hotel</li>
+            </ol>
+        </nav>
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <span class="hotel-category-badge"
+                  th:classappend="'cat-' + ${#strings.toLowerCase(hotel.category)}"
+                  th:text="${hotel.category}">Category</span>
+            <div class="star-rating">
+                <i th:each="s : ${#numbers.sequence(1, 5)}"
+                   th:class="${s <= hotel.stars} ? 'fas fa-star star-filled' : 'fas fa-star star-empty'"></i>
+                <span style="color:var(--text-muted); font-size:0.85rem; margin-left:0.3rem;"
+                      th:text="${hotel.stars + '-Star'}">*</span>
+            </div>
+        </div>
+        <h1 class="mb-2" th:text="${hotel.name}">Hotel Name</h1>
+        <p style="color:var(--text-muted); font-size:0.95rem;">
+            <i class="fas fa-map-marker-alt me-1" style="color:var(--accent);"></i>
+            <span th:text="${hotel.location}">Location</span>
+        </p>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section-py">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- Left: Gallery + Details -->
+            <div class="col-lg-8">
+                <!-- Gallery -->
+                <div class="hotel-detail-gallery">
+                    <div class="hotel-gallery-main">
+                        <img th:src="@{'/images/' + ${hotel.image}}" th:alt="${hotel.name}" loading="eager"/>
+                    </div>
+                    <div class="hotel-gallery-side">
+                        <div class="hotel-gallery-thumb">
+                            <img th:src="@{'/images/beach.jpg'}" alt="Hotel view" loading="lazy"/>
+                        </div>
+                        <div class="hotel-gallery-thumb position-relative">
+                            <img th:src="@{'/images/hero.jpg'}" alt="Hotel surroundings" loading="lazy"/>
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                                 style="background:rgba(0,0,0,0.45); border-radius:0; cursor:pointer;">
+                                <span style="color:#fff; font-size:1.2rem; font-weight:700;">
+                                    <i class="fas fa-images me-1"></i> View All
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="detail-section-card mb-4">
+                    <h2 class="detail-section-title"><i class="fas fa-hotel"></i> About this Hotel</h2>
+                    <p style="color:var(--text-secondary); font-size:1rem; line-height:1.85;" th:text="${hotel.description}">Description</p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="info-chip">
+                            <i class="fas fa-phone"></i> <span th:text="${hotel.phone}">Phone</span>
+                        </span>
+                        <span class="info-chip">
+                            <i class="fas fa-envelope"></i> <span th:text="${hotel.email}">Email</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Amenities -->
+                <div class="detail-section-card mb-4">
+                    <h2 class="detail-section-title"><i class="fas fa-concierge-bell"></i> Hotel Amenities</h2>
+                    <div class="row g-2">
+                        <div class="col-md-6 col-lg-4" th:each="amenity : ${hotel.amenities}">
+                            <div class="amenity-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span th:text="${amenity}">Amenity</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guest Reviews -->
+                <div class="detail-section-card">
+                    <h2 class="detail-section-title"><i class="fas fa-comments"></i> Guest Reviews</h2>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">SR</div>
+                                <div>
+                                    <div class="reviewer-name">Suresh Raj</div>
+                                    <div class="review-date">June 2025</div>
+                                </div>
+                            </div>
+                            <div class="star-rating">
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">Exceptional stay! The rooms were immaculate, the service was impeccable, and the food was absolutely heavenly. Will definitely return on our next Tamil Nadu trip.</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar" style="background:linear-gradient(135deg,#0a9396,#94d2bd);">NK</div>
+                                <div>
+                                    <div class="reviewer-name">Nandita Kumar</div>
+                                    <div class="review-date">May 2025</div>
+                                </div>
+                            </div>
+                            <div class="star-rating">
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-empty"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">Great location and wonderful hospitality. The staff went above and beyond to accommodate our family's needs. The breakfast spread was incredible with both local and continental options.</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar" style="background:linear-gradient(135deg,#e07a5f,#f2cc8f);">JL</div>
+                                <div>
+                                    <div class="reviewer-name">James Liu</div>
+                                    <div class="review-date">April 2025</div>
+                                </div>
+                            </div>
+                            <div class="star-rating">
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">As an international traveler I was blown away by this hotel. World-class facilities, authentic Tamil hospitality, and the proximity to key tourist sites made our India trip truly memorable.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-lg-4">
+
+                <!-- Booking Card -->
+                <div class="detail-section-card mb-4" style="position:sticky; top:90px;">
+                    <h2 class="detail-section-title"><i class="fas fa-calendar-check"></i> Book Your Stay</h2>
+
+                    <div class="text-center mb-3">
+                        <div style="font-size:2rem; font-weight:800; color:var(--accent); font-family:'Inter',sans-serif;">
+                            ₹<span th:text="${#numbers.formatInteger(hotel.pricePerNight, 0, 'COMMA')}">Price</span>
+                        </div>
+                        <div style="color:var(--text-muted); font-size:0.82rem;">per night, taxes included</div>
+                    </div>
+
+                    <div class="d-flex flex-column gap-2 mb-4">
+                        <div class="d-flex justify-content-between py-2 border-bottom" style="border-color:var(--border) !important;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Rating</span>
+                            <span>
+                                <i th:each="s : ${#numbers.sequence(1, hotel.stars)}" class="fas fa-star star-filled" style="font-size:0.82rem;"></i>
+                                <span style="color:var(--text-primary); font-weight:600; font-size:0.85rem; margin-left:4px;" th:text="${hotel.stars + '/5'}">5/5</span>
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between py-2 border-bottom" style="border-color:var(--border) !important;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Category</span>
+                            <span style="color:var(--text-primary); font-weight:600; font-size:0.85rem;" th:text="${hotel.category}">-</span>
+                        </div>
+                        <div class="d-flex justify-content-between py-2">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Location</span>
+                            <span style="color:var(--text-primary); font-weight:600; font-size:0.85rem;" th:text="${hotel.location}">-</span>
+                        </div>
+                    </div>
+
+                    <a th:href="${hotel.bookingURL}" target="_blank" rel="noopener"
+                       class="btn-accent d-flex justify-content-center mb-2">
+                        <i class="fas fa-calendar-alt"></i> Book Now
+                    </a>
+                    <a th:href="'tel:' + ${hotel.phone}" class="btn-outline-brand d-flex justify-content-center">
+                        <i class="fas fa-phone"></i> Call Hotel
+                    </a>
+
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.75rem; text-align:center;">
+                        <i class="fas fa-shield-alt me-1"></i> Secure booking via hotel's official site
+                    </p>
+                </div>
+
+                <!-- Similar Hotels -->
+                <div class="detail-section-card" th:if="${!similarHotels.isEmpty()}">
+                    <h2 class="detail-section-title"><i class="fas fa-th-large"></i> Similar Hotels</h2>
+                    <div th:each="similar : ${similarHotels}">
+                        <a th:href="@{'/hotels/' + ${similar.id}}" class="nearby-card mb-2">
+                            <div class="nearby-thumb">
+                                <img th:src="@{'/images/' + ${similar.image}}" th:alt="${similar.name}" loading="lazy"/>
+                            </div>
+                            <div>
+                                <div class="nearby-name" th:text="${similar.name}">Name</div>
+                                <div class="nearby-district">
+                                    <i class="fas fa-map-marker-alt me-1" style="color:var(--accent);"></i>
+                                    <span th:text="${similar.location}">Location</span>
+                                </div>
+                                <div style="color:var(--accent); font-size:0.82rem; font-weight:700; margin-top:0.2rem;">
+                                    ₹<span th:text="${#numbers.formatInteger(similar.pricePerNight, 0, 'COMMA')}">Price</span>/night
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div class="mt-4">
+            <a th:href="@{/hotels}" class="btn-outline-brand">
+                <i class="fas fa-arrow-left"></i> Back to All Hotels
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="footer-brand"><i class="fas fa-landmark text-accent me-2"></i>TN Tourism</div>
+                <p class="footer-desc">Your official guide to Tamil Nadu tourism.</p>
+            </div>
+            <div class="col-md-4">
+                <p class="footer-heading">Quick Links</p>
+                <ul class="footer-links">
+                    <li><a th:href="@{/}"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Attractions</a></li>
+                    <li><a th:href="@{/hotels}"><i class="fas fa-chevron-right"></i> Hotels</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <p class="footer-heading">Contact</p>
+                <div class="footer-contact-item"><i class="fas fa-phone"></i> 1800-425-4747</div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>© 2025 Tamil Nadu Tourism Department. All rights reserved.</p></div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

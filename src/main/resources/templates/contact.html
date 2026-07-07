@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!--
+    contact.html – Contact form and information page.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Get in touch with the Tamil Nadu Tourism Department. Find our contact details, helpline numbers, and office addresses."/>
+    <title th:text="${pageTitle}">Contact Us – Tamil Nadu Tourism</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg" id="mainNavbar">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/}">
+            <i class="fas fa-landmark brand-icon fs-4"></i>
+            <div>
+                <span class="d-block lh-1" style="font-size:1.15rem; font-weight:800;">TN Tourism</span>
+                <span class="brand-sub">State Tourism Department</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/attractions}">Attractions</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/hotels}">Hotels</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/guides}">Guides</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/gallery}">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
+                <li class="nav-item ms-lg-2"><a class="btn btn-sm btn-primary-brand active" th:href="@{/contact}"><i class="fas fa-envelope me-1"></i>Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="container position-relative" style="z-index:5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item active">Contact</li>
+            </ol>
+        </nav>
+        <h1 class="mb-3">Get in <span class="gradient-text">Touch</span></h1>
+        <p style="color:var(--text-secondary); font-size:1.05rem; max-width:560px;">
+            Have questions about planning your trip to Tamil Nadu? Our tourist information centers are here to help.
+        </p>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section-py">
+    <div class="container">
+        
+        <!-- Success Message on Submit -->
+        <div th:if="${successMessage}" class="alert alert-success alert-success-brand mb-5" role="alert">
+            <i class="fas fa-check-circle" style="font-size: 1.25rem;"></i>
+            <span th:text="${successMessage}"></span>
+        </div>
+
+        <div class="row g-5">
+            <!-- Contact Form -->
+            <div class="col-lg-7">
+                <div class="detail-section-card h-100">
+                    <h2 class="detail-section-title"><i class="fas fa-paper-plane"></i> Send us a Message</h2>
+                    
+                    <form th:action="@{/contact}" method="post" class="mt-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label-tourism">Full Name *</label>
+                                <input type="text" class="form-control-tourism" id="name" name="name" required placeholder="John Doe">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label-tourism">Email Address *</label>
+                                <input type="email" class="form-control-tourism" id="email" name="email" required placeholder="john@example.com">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label-tourism">Phone Number</label>
+                                <input type="tel" class="form-control-tourism" id="phone" name="phone" placeholder="+91 98765 43210">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="subject" class="form-label-tourism">Subject *</label>
+                                <select class="form-control-tourism" id="subject" name="subject" required>
+                                    <option value="" disabled selected>Select a subject</option>
+                                    <option value="General Inquiry">General Tourist Inquiry</option>
+                                    <option value="Hotel Booking">Hotel Booking Assistance</option>
+                                    <option value="Tour Package">Tour Packages</option>
+                                    <option value="Complaint">Feedback / Complaint</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="message" class="form-label-tourism">Message *</label>
+                                <textarea class="form-control-tourism" id="message" name="message" rows="5" required placeholder="How can we help you plan your trip?"></textarea>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn-primary-brand w-100 justify-content-center py-3">
+                                    <i class="fas fa-paper-plane"></i> Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="col-lg-5">
+                <div class="detail-section-card mb-4" style="background: linear-gradient(135deg, rgba(13,110,253,0.1), rgba(25,135,84,0.08));">
+                    <h2 class="detail-section-title"><i class="fas fa-headset"></i> Tourist Helpline</h2>
+                    <div class="text-center py-3">
+                        <div style="font-size: 2.2rem; font-weight: 800; color: var(--accent); font-family: 'Inter', sans-serif;">
+                            1800-425-4747
+                        </div>
+                        <p style="color:var(--text-secondary); margin-bottom:0;">Toll-Free • 24x7 Available</p>
+                    </div>
+                </div>
+
+                <div class="detail-section-card mb-4">
+                    <h2 class="detail-section-title"><i class="fas fa-building"></i> Head Office</h2>
+                    
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="fas fa-map-marker-alt mt-1" style="color:var(--accent); font-size:1.2rem;"></i>
+                        <div>
+                            <strong style="color:var(--text-primary); d-block">Tamil Nadu Tourism Complex</strong>
+                            <p style="color:var(--text-secondary); margin-bottom:0; font-size: 0.9rem;">No. 2, Wallajah Road,<br>Chennai – 600 002,<br>Tamil Nadu, India.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="fas fa-phone-alt mt-1" style="color:var(--primary-light); font-size:1.2rem;"></i>
+                        <div>
+                            <strong style="color:var(--text-primary); d-block">Phone</strong>
+                            <p style="color:var(--text-secondary); margin-bottom:0; font-size: 0.9rem;">+91-44-2538-3333</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-3">
+                        <i class="fas fa-envelope mt-1" style="color:var(--secondary); font-size:1.2rem;"></i>
+                        <div>
+                            <strong style="color:var(--text-primary); d-block">Email</strong>
+                            <p style="color:var(--text-secondary); margin-bottom:0; font-size: 0.9rem;">info@tamilnadutourism.tn.gov.in</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Map Placeholder -->
+                <div class="detail-section-card p-0 overflow-hidden" style="height: 250px;">
+                    <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center" style="background:var(--bg-section);">
+                        <i class="fas fa-map-marked-alt mb-2" style="font-size:2.5rem; color:var(--text-muted);"></i>
+                        <span style="color:var(--text-secondary);">Interactive Map Integration</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="footer-brand"><i class="fas fa-landmark text-accent me-2"></i>TN Tourism</div>
+                <p class="footer-desc">Your official guide to Tamil Nadu tourism.</p>
+            </div>
+            <div class="col-md-4">
+                <p class="footer-heading">Quick Links</p>
+                <ul class="footer-links">
+                    <li><a th:href="@{/}"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Attractions</a></li>
+                    <li><a th:href="@{/hotels}"><i class="fas fa-chevron-right"></i> Hotels</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <p class="footer-heading">Follow Us</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>© 2025 Tamil Nadu Tourism Department. All rights reserved.</p></div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

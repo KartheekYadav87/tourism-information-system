@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<!--
+    index.html – Homepage of the Tamil Nadu Tourism Information System
+    Sections: Hero, Welcome, Features, Featured Destinations, Popular Hotels,
+              Statistics, Testimonials, Travel Tips, CTA Banner
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Tamil Nadu Tourism – Discover the Land of Temples, Beaches, Wildlife, and Vibrant Culture. Plan your perfect trip with official tourism information."/>
+    <title th:text="${pageTitle}">Tamil Nadu Tourism – Home</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <!-- Global + Home CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/home.css}"/>
+</head>
+<body>
+
+<!-- ══════════════════════ NAVBAR ══════════════════════ -->
+<nav class="navbar navbar-expand-lg" id="mainNavbar">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/}">
+            <i class="fas fa-landmark brand-icon fs-4"></i>
+            <div>
+                <span class="d-block lh-1" style="font-size:1.15rem; font-weight:800;">TN Tourism</span>
+                <span class="brand-sub">State Tourism Department</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/attractions}">Attractions</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/hotels}">Hotels</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/guides}">Guides</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/gallery}">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn btn-sm btn-primary-brand" th:href="@{/contact}">
+                        <i class="fas fa-envelope me-1"></i>Contact Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ══════════════════════ HERO SECTION ══════════════════════ -->
+<section class="home-hero" id="hero">
+    <!-- Background orbs -->
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="container position-relative" style="z-index:10; padding-top: 100px; padding-bottom: 60px;">
+        <div class="row align-items-center gy-5">
+            <!-- Left Content -->
+            <div class="col-lg-6">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    Official Tamil Nadu Tourism Portal
+                </div>
+
+                <h1 class="hero-title">
+                    Discover the
+                    <span class="highlight">Magic of Tamil Nadu</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    From ancient Dravidian temples and pristine beaches to misty hill stations
+                    and thrilling wildlife sanctuaries — Tamil Nadu is a land of endless wonders.
+                    Begin your journey today.
+                </p>
+
+                <div class="hero-actions">
+                    <a th:href="@{/attractions}" class="btn-primary-brand" id="hero-explore-btn">
+                        <i class="fas fa-compass"></i> Explore Attractions
+                    </a>
+                    <a th:href="@{/hotels}" class="btn-outline-brand" id="hero-hotels-btn">
+                        <i class="fas fa-hotel"></i> Find Hotels
+                    </a>
+                </div>
+
+                <div class="hero-stats-row">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number" data-count="15" data-suffix="+">0</div>
+                        <div class="hero-stat-label">Attractions</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number" data-count="15" data-suffix="+">0</div>
+                        <div class="hero-stat-label">Hotels</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number" data-count="10" data-suffix="+">0</div>
+                        <div class="hero-stat-label">Travel Guides</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number" data-count="2000" data-suffix="+">0</div>
+                        <div class="hero-stat-label">Years of Heritage</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right – Floating cards visual -->
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="hero-visual">
+                    <img th:src="@{/images/hero.jpg}" alt="Tamil Nadu tourism landscape"
+                         class="hero-img-main" loading="eager"/>
+
+                    <div class="hero-float-card hero-float-card-1">
+                        <div class="float-icon float-icon-green">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div>
+                            <div class="float-title">15 Destinations</div>
+                            <div class="float-sub">Curated tourist attractions</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-float-card hero-float-card-2">
+                        <div class="float-icon float-icon-blue">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div>
+                            <div class="float-title">Top Rated</div>
+                            <div class="float-sub">UNESCO World Heritage Sites</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ WELCOME SECTION ══════════════════════ -->
+<section class="welcome-section" id="welcome">
+    <div class="container">
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-6">
+                <span class="section-label">Welcome to Tamil Nadu</span>
+                <h2 class="section-title">The Land of Temples, Culture &amp; Natural Beauty</h2>
+                <p style="color: var(--text-secondary); font-size: 1.02rem; line-height:1.8;">
+                    Tamil Nadu, the southernmost state of peninsular India, is a vibrant tapestry of
+                    ancient civilization, spiritual devotion, and breathtaking natural landscapes.
+                    With a coastline stretching over 1,076 km, towering Dravidian temple gopurams
+                    soaring into the sky, and dense wildlife reserves in the Nilgiris, the state
+                    offers every kind of travel experience imaginable.
+                </p>
+                <p style="color: var(--text-secondary); font-size: 1.02rem; line-height:1.8;">
+                    Home to 39 UNESCO recognized monuments, the cradle of Carnatic music and
+                    Bharatanatyam dance, and one of the world's oldest living languages — Tamil —
+                    this remarkable state invites you to discover a civilization that has flourished
+                    for over 2,000 years.
+                </p>
+                <div class="mt-4 d-flex gap-3 flex-wrap">
+                    <a th:href="@{/about}" class="btn-secondary-brand">
+                        <i class="fas fa-info-circle"></i> Learn More
+                    </a>
+                    <a th:href="@{/guides}" class="btn-outline-brand">
+                        <i class="fas fa-book-open"></i> Travel Guides
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6 reveal" style="animation-delay:0.1s">
+                        <div class="glass-card p-3 text-center h-100">
+                            <div class="feature-icon-wrap blue mx-auto">
+                                <i class="fas fa-place-of-worship"></i>
+                            </div>
+                            <h5 class="mb-1" style="font-family:'Inter',sans-serif; font-size:1rem; font-weight:700;">Temples</h5>
+                            <p class="mb-0" style="font-size:0.82rem; color:var(--text-muted);">34,000+ temples including UNESCO World Heritage Sites</p>
+                        </div>
+                    </div>
+                    <div class="col-6 reveal" style="animation-delay:0.2s">
+                        <div class="glass-card p-3 text-center h-100">
+                            <div class="feature-icon-wrap green mx-auto">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h5 class="mb-1" style="font-family:'Inter',sans-serif; font-size:1rem; font-weight:700;">Beaches</h5>
+                            <p class="mb-0" style="font-size:0.82rem; color:var(--text-muted);">1,076 km of coastline with pristine beaches</p>
+                        </div>
+                    </div>
+                    <div class="col-6 reveal" style="animation-delay:0.3s">
+                        <div class="glass-card p-3 text-center h-100">
+                            <div class="feature-icon-wrap orange mx-auto">
+                                <i class="fas fa-paw"></i>
+                            </div>
+                            <h5 class="mb-1" style="font-family:'Inter',sans-serif; font-size:1rem; font-weight:700;">Wildlife</h5>
+                            <p class="mb-0" style="font-size:0.82rem; color:var(--text-muted);">17 wildlife sanctuaries and 5 tiger reserves</p>
+                        </div>
+                    </div>
+                    <div class="col-6 reveal" style="animation-delay:0.4s">
+                        <div class="glass-card p-3 text-center h-100">
+                            <div class="feature-icon-wrap purple mx-auto">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <h5 class="mb-1" style="font-family:'Inter',sans-serif; font-size:1rem; font-weight:700;">Hill Stations</h5>
+                            <p class="mb-0" style="font-size:0.82rem; color:var(--text-muted);">Ooty, Kodaikanal, Yercaud & more</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ FEATURED ATTRACTIONS ══════════════════════ -->
+<section class="destinations-section" id="featured-attractions">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">Must-Visit Places</span>
+            <h2 class="section-title">Featured Destinations</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle mx-auto">
+                Hand-picked attractions across Tamil Nadu — from UNESCO temples to pristine beaches.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 reveal" th:each="attraction, iter : ${featuredAttractions}"
+                 th:style="'animation-delay:' + ${iter.index * 0.1} + 's'">
+                <div class="card-tourism h-100">
+                    <div class="card-img-wrap">
+                        <img th:src="@{'/images/' + ${attraction.image}}"
+                             th:alt="${attraction.name}"
+                             loading="lazy"/>
+                        <div class="card-img-overlay-badge">
+                            <span class="category-badge"
+                                  th:classappend="'badge-' + ${#strings.toLowerCase(attraction.category)}"
+                                  th:text="${attraction.category}">Category</span>
+                        </div>
+                    </div>
+                    <div class="card-body-inner d-flex flex-column">
+                        <h3 class="card-title-tourism" th:text="${attraction.name}">Name</h3>
+                        <p class="card-meta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span th:text="${attraction.district}">District</span>
+                        </p>
+                        <p class="card-desc" th:text="${attraction.description}">Description</p>
+                        <div class="mt-auto d-flex gap-2 flex-wrap">
+                            <span class="info-chip">
+                                <i class="fas fa-clock"></i>
+                                <span th:text="${#strings.abbreviate(attraction.openingHours, 20)}">Hours</span>
+                            </span>
+                            <span class="info-chip">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span th:text="${#strings.abbreviate(attraction.entryFee, 12)}">Fee</span>
+                            </span>
+                        </div>
+                        <a th:href="@{'/attractions/' + ${attraction.id}}"
+                           class="btn-primary-brand mt-3 d-inline-flex w-100 justify-content-center">
+                            <i class="fas fa-eye"></i> Explore
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a th:href="@{/attractions}" class="btn-secondary-brand">
+                <i class="fas fa-th-large"></i> View All [[${totalAttractions}]] Attractions
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ POPULAR HOTELS ══════════════════════ -->
+<section class="hotels-section-home" id="popular-hotels">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">Where to Stay</span>
+            <h2 class="section-title">Popular Hotels</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle mx-auto">
+                From luxurious 5-star resorts to cozy budget stays, find the perfect accommodation.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 reveal" th:each="hotel, iter : ${featuredHotels}"
+                 th:style="'animation-delay:' + ${iter.index * 0.12} + 's'">
+                <div class="card-tourism h-100">
+                    <div class="card-img-wrap">
+                        <img th:src="@{'/images/' + ${hotel.image}}" th:alt="${hotel.name}" loading="lazy"/>
+                        <div class="card-img-overlay-badge">
+                            <span class="category-badge"
+                                  th:classappend="${hotel.stars == 5} ? 'badge-temple' : (${hotel.stars >= 4} ? 'badge-wildlife' : 'badge-hill')"
+                                  th:text="${hotel.stars + '-Star'}">Stars</span>
+                        </div>
+                    </div>
+                    <div class="card-body-inner d-flex flex-column">
+                        <h3 class="card-title-tourism" th:text="${hotel.name}">Hotel Name</h3>
+                        <p class="card-meta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span th:text="${hotel.location}">Location</span>
+                        </p>
+                        <!-- Star display -->
+                        <div class="star-rating mb-2">
+                            <i th:each="s : ${#numbers.sequence(1, 5)}"
+                               th:class="${s <= hotel.stars} ? 'fas fa-star star-filled' : 'fas fa-star star-empty'"></i>
+                        </div>
+                        <p class="card-desc" th:text="${hotel.description}">Description</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="price-badge">
+                                    ₹<span th:text="${#numbers.formatInteger(hotel.pricePerNight, 0, 'COMMA')}">Price</span>
+                                    <span class="price-per">/night</span>
+                                </span>
+                            </div>
+                            <a th:href="@{'/hotels/' + ${hotel.id}}"
+                               class="btn-primary-brand d-flex justify-content-center">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a th:href="@{/hotels}" class="btn-secondary-brand">
+                <i class="fas fa-hotel"></i> Browse All [[${totalHotels}]] Hotels
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ STATS SECTION ══════════════════════ -->
+<section class="stats-section" id="statistics">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">By the Numbers</span>
+            <h2 class="section-title" style="-webkit-text-fill-color: #fff;">Tamil Nadu Tourism in Figures</h2>
+        </div>
+        <div class="row g-4 text-center">
+            <div class="col-lg-3 col-md-6 stat-block reveal">
+                <div class="stat-icon"><i class="fas fa-mountain"></i></div>
+                <div class="stat-number" data-count="15" data-suffix="+">0</div>
+                <div class="stat-label">Tourist Attractions</div>
+            </div>
+            <div class="col-lg-3 col-md-6 stat-block reveal" style="animation-delay:0.15s">
+                <div class="stat-icon"><i class="fas fa-hotel"></i></div>
+                <div class="stat-number" data-count="15" data-suffix="+">0</div>
+                <div class="stat-label">Partner Hotels</div>
+            </div>
+            <div class="col-lg-3 col-md-6 stat-block reveal" style="animation-delay:0.3s">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number" data-count="47" data-suffix="M+">0</div>
+                <div class="stat-label">Annual Tourists</div>
+            </div>
+            <div class="col-lg-3 col-md-6 stat-block reveal" style="animation-delay:0.45s">
+                <div class="stat-icon"><i class="fas fa-award"></i></div>
+                <div class="stat-number" data-count="39" data-suffix="+">0</div>
+                <div class="stat-label">UNESCO Monuments</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ TESTIMONIALS ══════════════════════ -->
+<section class="testimonials-section" id="testimonials">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">What Tourists Say</span>
+            <h2 class="section-title">Traveller Testimonials</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <p class="testimonial-text">The Brihadeeswarar Temple in Thanjavur completely took my breath away. The sheer scale and intricate carvings made me realize why Tamil Nadu is called the Land of Temples. An absolute must-visit!</p>
+                    <div class="star-rating mb-2">
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AR</div>
+                        <div>
+                            <div class="testimonial-name">Arjun Reddy</div>
+                            <div class="testimonial-from"><i class="fas fa-map-marker-alt me-1"></i>Hyderabad, India</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal" style="animation-delay:0.15s">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <p class="testimonial-text">Ooty is absolutely magical in April! The Botanical Gardens, the toy train ride, and the tea estates created memories our family will cherish forever. The hotel recommendations here were spot on!</p>
+                    <div class="star-rating mb-2">
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #0a9396, #94d2bd);">PM</div>
+                        <div>
+                            <div class="testimonial-name">Priya Mehta</div>
+                            <div class="testimonial-from"><i class="fas fa-map-marker-alt me-1"></i>Mumbai, India</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal" style="animation-delay:0.3s">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <p class="testimonial-text">Hogenakkal Falls was an adventure like no other. The coracle boat ride through those ancient rocks with water roaring around us — simply exhilarating. Tamil Nadu surprised me at every turn!</p>
+                    <div class="star-rating mb-2">
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-filled"></i>
+                        <i class="fas fa-star star-empty"></i>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #e07a5f, #f2cc8f);">DK</div>
+                        <div>
+                            <div class="testimonial-name">Daniel Kim</div>
+                            <div class="testimonial-from"><i class="fas fa-map-marker-alt me-1"></i>Seoul, South Korea</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ TRAVEL TIPS ══════════════════════ -->
+<section class="tips-section" id="travel-tips">
+    <div class="container">
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-5">
+                <span class="section-label">Essential Tips</span>
+                <h2 class="section-title">Travel Smart in Tamil Nadu</h2>
+                <div class="section-divider mx-0"></div>
+                <p style="color:var(--text-secondary); font-size:1rem; line-height:1.8;">
+                    A little preparation goes a long way when exploring Tamil Nadu.
+                    Here are our top tips to make your journey smooth, safe, and unforgettable.
+                </p>
+                <a th:href="@{/guides}" class="btn-primary-brand mt-2">
+                    <i class="fas fa-book-open"></i> Read All Guides
+                </a>
+            </div>
+            <div class="col-lg-7">
+                <div class="tip-item reveal">
+                    <div class="tip-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div>
+                        <div class="tip-title">Best Time to Visit</div>
+                        <p class="tip-text">October to March is ideal for most destinations. Hill stations are pleasant year-round. Waterfalls are spectacular during monsoons (July–Sept).</p>
+                    </div>
+                </div>
+                <div class="tip-item reveal">
+                    <div class="tip-icon"><i class="fas fa-utensils"></i></div>
+                    <div>
+                        <div class="tip-title">Food &amp; Cuisine</div>
+                        <p class="tip-text">Try traditional Tamil meals on banana leaves, Chettinad cuisine, filter coffee, and fresh seafood. Stick to busy stalls for safe street food.</p>
+                    </div>
+                </div>
+                <div class="tip-item reveal">
+                    <div class="tip-icon"><i class="fas fa-tshirt"></i></div>
+                    <div>
+                        <div class="tip-title">What to Wear</div>
+                        <p class="tip-text">Dress modestly at temples — cover shoulders and knees. Carry a light jacket for hill stations. Comfortable sandals are essential for temple visits.</p>
+                    </div>
+                </div>
+                <div class="tip-item reveal">
+                    <div class="tip-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div>
+                        <div class="tip-title">Emergency Contacts</div>
+                        <p class="tip-text">Tourist Helpline: 1800-425-4747 (Free, 24x7). Police: 100. Ambulance: 108. Women Helpline: 181. Save these before you travel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ CTA BANNER ══════════════════════ -->
+<section class="cta-section" id="cta">
+    <div class="container position-relative" style="z-index:2">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 text-center">
+                <i class="fas fa-route mb-4 d-block" style="font-size:3rem; color: rgba(255,255,255,0.3);"></i>
+                <h2 class="mb-3" style="-webkit-text-fill-color:#fff;">Ready to Start Your Adventure?</h2>
+                <p class="mb-4" style="font-size:1.05rem;">
+                    Explore 15 handpicked attractions, browse 15 hotels, and get expert travel guides.
+                    Your perfect Tamil Nadu trip begins here.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a th:href="@{/attractions}" class="btn-accent">
+                        <i class="fas fa-compass"></i> Explore Now
+                    </a>
+                    <a th:href="@{/contact}" class="btn-outline-brand">
+                        <i class="fas fa-headset"></i> Talk to an Expert
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-brand"><i class="fas fa-landmark text-accent me-2"></i>TN Tourism</div>
+                <p class="footer-desc">Tamil Nadu Tourism Department – Your official guide to exploring beautiful Tamil Nadu. Discover temples, beaches, wildlife, and vibrant culture.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Quick Links</p>
+                <ul class="footer-links">
+                    <li><a th:href="@{/}"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Attractions</a></li>
+                    <li><a th:href="@{/hotels}"><i class="fas fa-chevron-right"></i> Hotels</a></li>
+                    <li><a th:href="@{/guides}"><i class="fas fa-chevron-right"></i> Guides</a></li>
+                    <li><a th:href="@{/gallery}"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                    <li><a th:href="@{/about}"><i class="fas fa-chevron-right"></i> About</a></li>
+                    <li><a th:href="@{/contact}"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Explore</p>
+                <ul class="footer-links">
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Beaches</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Temples</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Waterfalls</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Wildlife</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Hill Stations</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <p class="footer-heading">Contact Information</p>
+                <div class="footer-contact-item"><i class="fas fa-map-marker-alt mt-1"></i><span>Tourism Complex, 2 Wallajah Road,<br/>Chennai – 600 002, Tamil Nadu</span></div>
+                <div class="footer-contact-item"><i class="fas fa-phone"></i><span>Toll Free: 1800-425-4747</span></div>
+                <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>info@tamilnadutourism.tn.gov.in</span></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="row">
+                <div class="col-md-6"><p>© 2025 Tamil Nadu Tourism Department. All rights reserved.</p></div>
+                <div class="col-md-6 text-md-end"><p><a href="#" class="text-muted me-3" style="font-size:.82rem;">Privacy Policy</a><a href="#" class="text-muted" style="font-size:.82rem;">Sitemap</a></p></div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--
+    hotels.html – Hotels listing page with search and filter functionality.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Find the best hotels in Tamil Nadu – luxury resorts, heritage properties, budget stays, and business hotels across Chennai, Ooty, Kodaikanal, and more."/>
+    <title th:text="${pageTitle}">Hotels – Tamil Nadu Tourism</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/hotels.css}"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg" id="mainNavbar">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/}">
+            <i class="fas fa-landmark brand-icon fs-4"></i>
+            <div>
+                <span class="d-block lh-1" style="font-size:1.15rem; font-weight:800;">TN Tourism</span>
+                <span class="brand-sub">State Tourism Department</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/attractions}">Attractions</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/hotels}">Hotels</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/guides}">Guides</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/gallery}">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
+                <li class="nav-item ms-lg-2"><a class="btn btn-sm btn-primary-brand" th:href="@{/contact}"><i class="fas fa-envelope me-1"></i>Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="container position-relative" style="z-index:5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item active">Hotels</li>
+            </ol>
+        </nav>
+        <h1 class="mb-3">Hotels &amp; <span class="gradient-text">Accommodation</span></h1>
+        <p style="color:var(--text-secondary); font-size:1.05rem; max-width:560px;">
+            From luxurious 5-star resorts to charming heritage properties and budget stays —
+            find the perfect accommodation for your Tamil Nadu journey.
+        </p>
+    </div>
+</section>
+
+<!-- SEARCH & FILTER BAR -->
+<div class="sticky-top" style="top:72px; z-index:100; background: var(--bg-deep); border-bottom: 1px solid var(--border); padding: 0.75rem 0;">
+    <div class="container">
+        <div class="row align-items-center g-3">
+            <div class="col-md-4">
+                <div class="position-relative">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="hotel-search" class="search-bar"
+                           placeholder="Search hotels by name or city…" aria-label="Search hotels"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select id="cat-filter" class="form-select" aria-label="Filter by category"
+                        style="background:var(--dark-card); border-color:var(--border); color:var(--text-primary);">
+                    <option value="all">All Categories</option>
+                    <option value="luxury">Luxury</option>
+                    <option value="resort">Resort</option>
+                    <option value="business">Business</option>
+                    <option value="budget">Budget</option>
+                    <option value="heritage">Heritage</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select id="star-filter" class="form-select" aria-label="Filter by stars"
+                        style="background:var(--dark-card); border-color:var(--border); color:var(--text-primary);">
+                    <option value="0">All Stars</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                </select>
+            </div>
+            <div class="col-md-2 text-end">
+                <span id="hotel-result-count" style="color:var(--text-muted); font-size:0.85rem;" th:text="${hotels.size()} + ' hotels'">15 hotels</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HOTEL CARDS -->
+<section class="section-py">
+    <div class="container">
+        <!-- Category Chips -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="chip hotel-cat-chip active" data-cat="all">All</button>
+            <button class="chip hotel-cat-chip" data-cat="luxury"><i class="fas fa-crown me-1"></i>Luxury</button>
+            <button class="chip hotel-cat-chip" data-cat="resort"><i class="fas fa-swimming-pool me-1"></i>Resort</button>
+            <button class="chip hotel-cat-chip" data-cat="business"><i class="fas fa-briefcase me-1"></i>Business</button>
+            <button class="chip hotel-cat-chip" data-cat="budget"><i class="fas fa-wallet me-1"></i>Budget</button>
+            <button class="chip hotel-cat-chip" data-cat="heritage"><i class="fas fa-landmark me-1"></i>Heritage</button>
+        </div>
+
+        <div class="row g-4" id="hotels-grid">
+            <div class="col-lg-4 col-md-6 hotel-card-wrapper reveal"
+                 th:each="hotel, iter : ${hotels}"
+                 th:style="'animation-delay:' + ${iter.index * 0.06} + 's'">
+
+                <div class="hotel-card"
+                     th:data-name="${hotel.name}"
+                     th:data-location="${hotel.location}"
+                     th:data-stars="${hotel.stars}"
+                     th:data-category="${hotel.category}"
+                     th:data-price="${hotel.pricePerNight}">
+
+                    <div class="hotel-img-wrap">
+                        <img th:src="@{'/images/' + ${hotel.image}}" th:alt="${hotel.name}" loading="lazy"/>
+                        <span class="hotel-category-badge"
+                              th:classappend="'cat-' + ${#strings.toLowerCase(hotel.category)}"
+                              th:text="${hotel.category}">Category</span>
+                        <button class="hotel-wishlist-btn" title="Save to wishlist" aria-label="Add to wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="hotel-card-body">
+                        <h3 class="hotel-name" th:text="${hotel.name}">Hotel Name</h3>
+                        <p class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span th:text="${hotel.location}">Location</span>
+                        </p>
+
+                        <div class="hotel-stars">
+                            <i th:each="s : ${#numbers.sequence(1, 5)}"
+                               th:class="${s <= hotel.stars} ? 'fas fa-star' : 'fas fa-star empty'"></i>
+                            <span style="font-size:0.78rem; color:var(--text-muted); margin-left:0.4rem;"
+                                  th:text="${hotel.stars + '-Star Hotel'}">Stars</span>
+                        </div>
+
+                        <p class="hotel-desc" th:text="${hotel.description}">Description</p>
+
+                        <div class="amenity-tags">
+                            <span class="amenity-tag" th:each="amenity, iter : ${hotel.amenities}"
+                                  th:if="${iter.index < 4}"
+                                  th:text="${amenity}">Amenity</span>
+                            <span class="amenity-tag" th:if="${hotel.amenities.size() > 4}"
+                                  th:text="'+' + ${hotel.amenities.size() - 4} + ' more'">+more</span>
+                        </div>
+                    </div>
+
+                    <div class="hotel-card-footer">
+                        <div class="hotel-price">
+                            <span class="currency">₹</span>
+                            <span class="amount" th:text="${#numbers.formatInteger(hotel.pricePerNight, 0, 'COMMA')}">Price</span>
+                            <span class="per-night">per night</span>
+                        </div>
+                        <a th:href="@{'/hotels/' + ${hotel.id}}" class="btn-primary-brand">
+                            <i class="fas fa-eye"></i> Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="hotel-empty-state" style="display:none;">
+            <div class="empty-state-icon"><i class="fas fa-hotel"></i></div>
+            <h4>No Hotels Found</h4>
+            <p>Try adjusting your search or filter criteria.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="footer-brand"><i class="fas fa-landmark text-accent me-2"></i>TN Tourism</div>
+                <p class="footer-desc">Discover the wonders of Tamil Nadu with our official tourism portal.</p>
+            </div>
+            <div class="col-md-4">
+                <p class="footer-heading">Quick Links</p>
+                <ul class="footer-links">
+                    <li><a th:href="@{/}"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a th:href="@{/attractions}"><i class="fas fa-chevron-right"></i> Attractions</a></li>
+                    <li><a th:href="@{/hotels}"><i class="fas fa-chevron-right"></i> Hotels</a></li>
+                    <li><a th:href="@{/guides}"><i class="fas fa-chevron-right"></i> Guides</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <p class="footer-heading">Contact</p>
+                <div class="footer-contact-item"><i class="fas fa-phone"></i> 1800-425-4747</div>
+                <div class="footer-contact-item"><i class="fas fa-envelope"></i> info@tamilnadutourism.tn.gov.in</div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>© 2025 Tamil Nadu Tourism Department. All rights reserved.</p></div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/search.js}"></script>
+
+<script>
+// Wishlist heart toggle
+document.querySelectorAll('.hotel-wishlist-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        const icon = btn.querySelector('i');
+        icon.classList.toggle('far');
+        icon.classList.toggle('fas');
+        btn.style.color = icon.classList.contains('fas') ? '#fc8585' : '';
+    });
+});
+</script>
+</body>
+</html>

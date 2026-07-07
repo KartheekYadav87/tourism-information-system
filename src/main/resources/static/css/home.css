@@ -1,0 +1,434 @@
+/* =========================================================
+   HOME PAGE STYLES – Tamil Nadu Tourism
+   =========================================================
+   Specific styles for the homepage sections:
+   Hero, Features, Featured Destinations, Hotels, Stats,
+   Testimonials, and Travel Tips.
+   ========================================================= */
+
+/* ── Hero Section ── */
+.home-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #060e1a 0%, #0d2444 45%, #0a3320 100%);
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: rgba(255, 159, 67, 0.15);
+    border: 1px solid rgba(255, 159, 67, 0.35);
+    border-radius: 20px;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    animation: fadeInUp 0.6s ease both;
+}
+
+.hero-badge i { animation: pulse 2s ease infinite; }
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    animation: fadeInUp 0.7s ease 0.1s both;
+}
+
+.hero-title .highlight {
+    background: linear-gradient(135deg, #64b3f4, #44d4a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    animation: fadeInUp 0.7s ease 0.2s both;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.7s ease 0.3s both;
+}
+
+.hero-stats-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.7s ease 0.4s both;
+}
+
+.hero-stat {
+    text-align: left;
+}
+
+.hero-stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.hero-stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Hero visual – right side floating cards */
+.hero-visual {
+    position: relative;
+    height: 520px;
+    animation: fadeInUp 0.9s ease 0.2s both;
+}
+
+.hero-img-main {
+    position: absolute;
+    width: 380px;
+    height: 300px;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: var(--shadow-lg);
+    border: 3px solid rgba(255,255,255,0.1);
+}
+
+.hero-float-card {
+    position: absolute;
+    background: rgba(20, 35, 55, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: var(--shadow-md);
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+.hero-float-card-1 {
+    bottom: 80px;
+    left: 0;
+    animation-delay: 0s;
+}
+
+.hero-float-card-2 {
+    top: 20px;
+    right: 10px;
+    animation-delay: 2s;
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.float-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.float-icon-blue { background: rgba(13, 110, 253, 0.2); color: var(--primary-light); }
+.float-icon-green { background: rgba(25, 135, 84, 0.2); color: #64d0a0; }
+
+.float-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    font-family: 'Inter', sans-serif;
+}
+
+.float-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+/* ── Welcome / Introduction Section ── */
+.welcome-section {
+    padding: 90px 0;
+    background: var(--bg-section);
+}
+
+.welcome-icon-wrap {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(13,110,253,0.2), rgba(25,135,84,0.2));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+/* ── Feature Cards (icons row) ── */
+.feature-icon-wrap {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.feature-icon-wrap.blue   { background: rgba(13, 110, 253, 0.15); color: var(--primary-light); }
+.feature-icon-wrap.green  { background: rgba(25, 135, 84, 0.15); color: #64d0a0; }
+.feature-icon-wrap.orange { background: rgba(255, 159, 67, 0.15); color: var(--accent); }
+.feature-icon-wrap.purple { background: rgba(146, 102, 204, 0.15); color: #c7a1ff; }
+
+.glass-card:hover .feature-icon-wrap { transform: scale(1.1) rotate(-5deg); }
+
+/* ── Featured Destinations ── */
+.destinations-section {
+    padding: 90px 0;
+    background: var(--bg-deep);
+}
+
+/* ── Popular Hotels on Home ── */
+.hotels-section-home {
+    padding: 90px 0;
+    background: var(--bg-section);
+}
+
+.price-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.price-per {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 400;
+}
+
+/* ── Statistics Section ── */
+.stats-section {
+    padding: 90px 0;
+    background: linear-gradient(135deg, #061628 0%, #0d3320 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: rgba(13, 110, 253, 0.05);
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+.stat-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    transition: var(--transition);
+}
+
+.stat-block:hover .stat-icon {
+    background: rgba(255, 159, 67, 0.15);
+    transform: scale(1.1);
+}
+
+/* ── Testimonials ── */
+.testimonials-section {
+    padding: 90px 0;
+    background: var(--bg-deep);
+}
+
+.testimonial-card {
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    border-color: rgba(13, 110, 253, 0.35);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.testimonial-quote {
+    font-size: 2.5rem;
+    color: rgba(13, 110, 253, 0.3);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-family: Georgia, serif;
+}
+
+.testimonial-text {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 1.25rem;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.testimonial-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.testimonial-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+.testimonial-from {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* ── Travel Tips ── */
+.tips-section {
+    padding: 90px 0;
+    background: var(--bg-section);
+}
+
+.tip-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.tip-item:hover {
+    border-color: rgba(13, 110, 253, 0.3);
+    transform: translateX(5px);
+}
+
+.tip-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(13, 110, 253, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-light);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.tip-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.tip-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ── CTA Banner ── */
+.cta-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #085e50 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -10%;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+}
+
+.cta-section h2 { color: #fff; }
+.cta-section p  { color: rgba(255,255,255,0.75); }
+
+/* ── Responsive ── */
+@media (max-width: 991.98px) {
+    .hero-visual { display: none; }
+    .home-hero   { min-height: 90vh; }
+    .hero-title  { font-size: 2.5rem; }
+}
+
+@media (max-width: 575.98px) {
+    .hero-stats-row { gap: 1.25rem; }
+    .hero-stat-number { font-size: 1.5rem; }
+}

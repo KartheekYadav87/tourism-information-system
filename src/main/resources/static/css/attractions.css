@@ -1,0 +1,411 @@
+/* =========================================================
+   ATTRACTIONS PAGE STYLES – Tamil Nadu Tourism
+   =========================================================
+   Tourist attraction card layouts, category filters,
+   detail page styles, map placeholder, and gallery views.
+   ========================================================= */
+
+/* ── Attractions Grid Controls ── */
+.attractions-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.result-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+}
+
+.result-count span {
+    color: var(--primary-light);
+    font-weight: 700;
+}
+
+/* ── Attraction Card ── */
+.attraction-card {
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.attraction-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(25, 135, 84, 0.4);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(25, 135, 84, 0.2);
+}
+
+/* ── Attraction Card Image ── */
+.attraction-img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+}
+
+.attraction-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.attraction-card:hover .attraction-img-wrap img {
+    transform: scale(1.12);
+}
+
+/* Overlay on hover */
+.attraction-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+}
+
+.attraction-card:hover .attraction-img-overlay { opacity: 1; }
+
+.overlay-btn {
+    background: rgba(255,255,255,0.95);
+    color: var(--dark);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.overlay-btn:hover { background: var(--accent); color: #000; }
+
+/* Top badges */
+.attraction-badge-row {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.season-tag {
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* ── Attraction Card Body ── */
+.attraction-card-body {
+    padding: 1.15rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.attraction-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+    font-family: 'Inter', sans-serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.attraction-district {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.attraction-district i { color: var(--secondary); font-size: 0.75rem; }
+
+.attraction-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+/* Quick info chips */
+.attraction-quick-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.quick-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.quick-chip i {
+    font-size: 0.65rem;
+    color: var(--primary-light);
+}
+
+/* ── Attraction Detail Page ── */
+.attraction-hero-img {
+    width: 100%;
+    aspect-ratio: 21/9;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+}
+
+.detail-section-card {
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    font-family: 'Inter', sans-serif;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.detail-section-title i { color: var(--accent); }
+
+.detail-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.detail-info-item { }
+
+.detail-info-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.detail-info-value {
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+}
+
+.detail-info-value i { color: var(--primary-light); margin-top: 0.1rem; flex-shrink: 0; }
+
+/* ── Category Filter Pills ── */
+.category-filter-bar {
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 0.5rem;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 2rem;
+}
+
+.cat-filter-btn {
+    padding: 0.45rem 1.15rem;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.83rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.cat-filter-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.06);
+}
+
+.cat-filter-btn.active {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(13, 110, 253, 0.4);
+}
+
+/* Category icons colors */
+.cat-icon-beach     { color: #64b3f4; }
+.cat-icon-temple    { color: var(--accent); }
+.cat-icon-waterfall { color: #00bcd4; }
+.cat-icon-wildlife  { color: #64d0a0; }
+.cat-icon-hill      { color: #c7a1ff; }
+.cat-icon-museum    { color: #ff8a80; }
+.cat-icon-heritage  { color: #d4a57c; }
+
+/* ── Nearby Attractions ── */
+.nearby-card {
+    display: flex;
+    gap: 1rem;
+    background: var(--dark-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.85rem;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.nearby-card:hover {
+    border-color: rgba(13, 110, 253, 0.35);
+    transform: translateX(5px);
+}
+
+.nearby-thumb {
+    width: 70px;
+    height: 70px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.nearby-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nearby-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.nearby-district {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* ── Empty State ── */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    opacity: 0.4;
+}
+
+.empty-state h4 { color: var(--text-secondary); font-size: 1.2rem; }
+.empty-state p  { color: var(--text-muted); font-size: 0.9rem; }
+
+/* ── Gallery ── */
+.gallery-grid {
+    columns: 4;
+    column-gap: 12px;
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 12px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img { transform: scale(1.06); }
+
+.gallery-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+}
+
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+.gallery-caption { font-size: 0.85rem; font-weight: 700; color: #fff; }
+.gallery-district { font-size: 0.72rem; color: rgba(255,255,255,0.7); }
+
+/* ── Responsive ── */
+@media (max-width: 1199.98px) {
+    .gallery-grid { columns: 3; }
+}
+
+@media (max-width: 767.98px) {
+    .gallery-grid { columns: 2; }
+    .detail-info-grid { grid-template-columns: 1fr; }
+    .attraction-hero-img { aspect-ratio: 4/3; }
+    .category-filter-bar { border-radius: var(--radius-md); }
+}
+
+@media (max-width: 575.98px) {
+    .gallery-grid { columns: 1; }
+}
