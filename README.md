@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TN Tourism Information System
 
 A complete tourism portal for the State Tourism Department, built with Java Spring Boot and Thymeleaf.
@@ -62,3 +63,6 @@ http://localhost:8081
 - Implement user authentication with Spring Security.
 - Deploy to Kubernetes cluster with Jenkins CI/CD pipeline.
 - Implement booking integration for hotels and entry tickets.
+=======
+# tourism-information-system
+>>>>>>> f7efe1b65a214dbe94cdc1638ba3a7d4de3e9fc2
